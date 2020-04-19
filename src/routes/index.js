@@ -35,6 +35,7 @@ export const router = new VueRouter({
             component: UserView,
         },
         {
+            // routes.param.id 에 저장된다. :id 지정함으로써
             path: '/item/:id',
             component: ItemView,
         }
