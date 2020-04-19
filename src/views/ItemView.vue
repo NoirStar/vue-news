@@ -1,15 +1,36 @@
 <template>
   <div>
-    <p v-for="comment in itemList.comments" v-bind:key="comment.id">{{ comment.content }}</p>
+    <section>
+      <div class="user-container">
+        <div>
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="user-description">
+          <router-link :to="`/user/${fetchedItem.user}`">
+            {{ fetchedItem.user }}
+          </router-link>
+          <div class="time">
+            {{ fetchedItem.time_ago }}
+          </div>
+        </div>
+        
+      </div>
+      <!-- 상세 정보 영역 -->
+      <h2>{{ fetchedItem.title }}</h2>
+    </section>
+    <section>
+      <div v-html="fetchedItem.content">
+      </div>
+      <!-- 질문 댓글 -->
+    </section>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex' 
 export default {
   computed: {
-    itemList() {
-      return this.$store.state.items;
-    }
+    ...mapGetters(['fetchedItem'])
   },
   created() {
     const id = this.$route.params.id;
@@ -18,6 +39,23 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
+.user-container {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.fa-user {
+  font-size: 2.5rem;
+}
+
+.user-description {
+  padding-left: 8px;
+}
+
+.time {
+  font-size: 7px;
+}
 </style>
