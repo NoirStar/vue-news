@@ -1,9 +1,14 @@
 <template>
   <div>
-    <p v-for="item in this.$store.state.jobs" v-bind:key="item.id">
+    <ul class="jobs-list">
+      <li class="post" v-for="item in this.$store.state.jobs" v-bind:key="item.id">
+        <a :href="item.url"> {{ item.title }}</a>
+      </li>
+    </ul>
+    <!-- <p v-for="item in this.$store.state.jobs" v-bind:key="item.id">
       <a :href="item.url"> {{ item.title }}</a>
       <small>  {{ item.time_ago }} by {{ item.domain }}</small>
-    </p>
+    </p> -->
   </div>
 </template>
 
@@ -16,6 +21,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.jobs-list {
+  margin: 0;
+  padding: 0;
+}
+
+.post {
+  display: flex;
+}
 
 </style>
