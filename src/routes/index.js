@@ -20,14 +20,17 @@ export const router = new VueRouter({
         {
             // path: url 주소 , component: url주소로 갔을 때 표시 될 컨포넌트
             path: '/news',
+            name: 'news',
             component: NewsView,
         },
         {
             path: '/ask',
+            name: 'asks',
             component: AskView,
         },
         {
             path: '/jobs',
+            name: 'jobs',
             component: JobsView,
         },
         {
