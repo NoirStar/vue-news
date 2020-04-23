@@ -1,30 +1,29 @@
-import { fetchNewsList, fetchAsksList, fetchJobsList, fetchUserInfo, fetchItemsList }  from '../api/index.js'
+import { fetchUserInfo, fetchItemsList, fetchList }  from '../api/index.js'
+import { isContext } from 'vm'
 
 export default {
 
-    FETCH_NEWS({ commit }) {
-        fetchNewsList()
-            .then(({ data }) => commit('SET_NEWS',data))
-            .catch(e => console.log(e))
-    },
-    FETCH_ASKS({ commit }) {
-        fetchAsksList()
-            .then(({ data }) => commit('SET_ASKS',data))
-            .catch(e => console.log(e))
-    },
-    FETCH_JOBS({ commit }) {  // context.commit
-        fetchJobsList() // response.data
-            .then(( { data }) => commit('SET_JOBS',data))
-            .catch(e => console.log(e))
-    },
     FETCH_USERS({ commit },userName) {
-        fetchUserInfo(userName)
+        return fetchUserInfo(userName)
             .then(({ data }) => commit('SET_USERS',data))
             .catch(e => console.log(e))
     },
     FETCH_ITEMS({ commit },id) {
-        fetchItemsList(id)
+        return fetchItemsList(id)
             .then(({ data }) => commit('SET_ITEMS',data))
             .catch(e => console.log(e))
-    }
+    },
+    FETCH_LIST({commit}, pageName ) {
+        return fetchList(pageName)
+            .then(({ data }) => {
+                commit('SET_LIST',data)
+            } )
+            .catch(e => console.log(e))
+    },
+    async FETCH_LIST({commit}, pageName ) {
+        // promise를 반환하는 함수 앞에 await를 붙인다.
+        const response = await fetchList(pageName);
+        commit('SET_LIST',response.data);
+        
+    },
 }

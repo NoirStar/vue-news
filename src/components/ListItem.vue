@@ -38,28 +38,9 @@
 
 <script>
 export default {
-  created() {
-    const name = this.$route.name;
-    let actionName;
-    if (name === 'news') {
-        actionName = 'FETCH_NEWS'
-    } else if (name === 'asks') {
-        actionName = 'FETCH_ASKS'
-    } else if (name === 'jobs') {
-        actionName = 'FETCH_JOBS'
-    }
-    this.$store.dispatch(actionName);
-  },
   computed: {
       listItems() {
-        const name = this.$route.name;
-        if (name === 'news') {
-            return this.$store.state.news;
-        } else if (name === 'asks') {
-            return this.$store.state.asks;
-        } else {
-            return this.$store.state.jobs;
-        }
+        return this.$store.state.list
       }
   }
 }
